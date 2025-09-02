@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="https://i.imghippo.com/files/LWm4944bRo.png" />
+    <title>KBM Daring</title>
+    <style>
+        /* CSS untuk memastikan iframe mengisi seluruh viewport tanpa scrollbar tambahan dari halaman embed */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Mencegah scrollbar pada body halaman embed */
+        }
+        iframe {
+            display: block; /* Menghilangkan spasi ekstra di bawah iframe inline */
+            border: none; /* Sudah ada di inline style, tapi baik untuk ditekankan */
+        }
+    </style>
+</head>
+<body>
+    <iframe  
+        id="appFrame"
+        src="https://script.google.com/macros/s/AKfycbzdCsM3v20eJPSbrjrEPGcYXAKY2vqNFtcKDIP4KawbVAPqmiBKWQdI9goaTjIGHyeT/exec"
+        width="100%"
+        height="100%"
+        allowfullscreen="true"
+        allow="camera" 
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+        Browser Anda tidak mendukung iframe.
+    </iframe>
+
+    <script>
+        // Fungsi untuk mencoba masuk mode fullscreen
+        // Perlu diingat bahwa requestFullscreen() biasanya memerlukan interaksi pengguna
+        // dan mungkin tidak selalu berhasil secara otomatis saat halaman dimuat.
+        // window.onload = function() {
+        //     const iframe = document.getElementById('appFrame');
+        //     if (iframe && iframe.requestFullscreen) {
+        //         iframe.requestFullscreen()
+        //             .then(() => console.log('Fullscreen mode activated for iframe.'))
+        //             .catch((err) => {
+        //                 console.error('Error attempting to enable full-screen mode for iframe:', err.message, err.name);
+        //                 // Mungkin perlu tombol manual untuk fullscreen jika otomatis gagal
+        //             });
+        //     } else if (iframe && iframe.webkitRequestFullscreen) { // Safari
+        //         iframe.webkitRequestFullscreen();
+        //     } else if (iframe && iframe.msRequestFullscreen) { // IE11
+        //         iframe.msRequestFullscreen();
+        //     }
+        // };
+
+        // Catatan: Script fullscreen di atas mungkin tidak berjalan otomatis di banyak browser modern
+        // karena pembatasan keamanan. Anda mungkin perlu memicu fullscreen dari interaksi pengguna (misalnya, klik tombol).
+        // Untuk tujuan responsivitas dasar, viewport meta tag dan CSS sudah cukup.
+
+    </script>
+</body>
+</html>
