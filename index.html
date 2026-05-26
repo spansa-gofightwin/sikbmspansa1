@@ -3,59 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link rel="shortcut icon" type="image/png" href="https://lh3.googleusercontent.com/d/1tQPCSlVqJv08xNKeZRZhtRKC8T8PF-Uj?authuser=0" />
-    <title>SI KBM SPANSA</title>
+    <link rel="shortcut icon" type="image/png" href="https://i.imghippo.com/files/LWm4944bRo.png" />
+    <title>IDENTITAS KELAS IX</title>
+    
+    <!-- Menggunakan font Google 'Poppins' untuk kesan lebih modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
-        /* CSS untuk memastikan iframe mengisi seluruh viewport tanpa scrollbar tambahan dari halaman embed */
+        /* Reset dasar dan memastikan layar penuh tanpa scroll */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
-            overflow: hidden; /* Mencegah scrollbar pada body halaman embed */
+            overflow: hidden;
+            background-color: #f8f9fa; /* Warna latar belakang abu-abu sangat muda */
+            font-family: 'Poppins', sans-serif;
         }
+
+        /* Desain untuk Layar Pemuatan (Loading Screen) */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f3f5 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        /* Animasi Spinner yang elegan */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(79, 70, 229, 0.1);
+            border-left-color: #4f46e5; /* Warna aksen biru/ungu modern */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Teks pemuatan */
+        .loading-text {
+            color: #495057;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Iframe disembunyikan di awal, lalu muncul dengan animasi fade-in */
         iframe {
-            display: block; /* Menghilangkan spasi ekstra di bawah iframe inline */
-            border: none; /* Sudah ada di inline style, tapi baik untuk ditekankan */
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0; /* Mulai dengan transparan */
+            transition: opacity 0.8s ease-in-out; /* Efek transisi mulus */
+        }
+
+        /* Class tambahan untuk memunculkan iframe */
+        iframe.loaded {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
+
+    <!-- Layar Pemuatan (Loader) -->
+    <div id="loader-wrapper">
+        <div class="spinner"></div>
+        <div class="loading-text">Memuat Identitas Kelas IX...</div>
+    </div>
+
+    <!-- Iframe dengan URL Google Apps Script -->
     <iframe  
         id="appFrame"
-        src="https://si-kbm.vercel.app/"
-        width="100%"
-        height="100%"
+        src="https://script.google.com/macros/s/AKfycbxh-NMYNfkUHHzto8DXhLZoz1PS0Q3IgeI8vlD_lPFjJ5sbeBhasmQ8UPYqjIaIGwYmgw/exec"
         allowfullscreen="true"
         allow="camera" 
-        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+        onload="onIframeLoad()">
         Browser Anda tidak mendukung iframe.
     </iframe>
 
     <script>
-        // Fungsi untuk mencoba masuk mode fullscreen
-        // Perlu diingat bahwa requestFullscreen() biasanya memerlukan interaksi pengguna
-        // dan mungkin tidak selalu berhasil secara otomatis saat halaman dimuat.
-        // window.onload = function() {
-        //     const iframe = document.getElementById('appFrame');
-        //     if (iframe && iframe.requestFullscreen) {
-        //         iframe.requestFullscreen()
-        //             .then(() => console.log('Fullscreen mode activated for iframe.'))
-        //             .catch((err) => {
-        //                 console.error('Error attempting to enable full-screen mode for iframe:', err.message, err.name);
-        //                 // Mungkin perlu tombol manual untuk fullscreen jika otomatis gagal
-        //             });
-        //     } else if (iframe && iframe.webkitRequestFullscreen) { // Safari
-        //         iframe.webkitRequestFullscreen();
-        //     } else if (iframe && iframe.msRequestFullscreen) { // IE11
-        //         iframe.msRequestFullscreen();
-        //     }
-        // };
-
-        // Catatan: Script fullscreen di atas mungkin tidak berjalan otomatis di banyak browser modern
-        // karena pembatasan keamanan. Anda mungkin perlu memicu fullscreen dari interaksi pengguna (misalnya, klik tombol).
-        // Untuk tujuan responsivitas dasar, viewport meta tag dan CSS sudah cukup.
-
+        // --- SCRIPT UNTUK MENGHILANGKAN LOADER SECARA MULUS ---
+        function onIframeLoad() {
+            const loader = document.getElementById('loader-wrapper');
+            const iframe = document.getElementById('appFrame');
+            
+            // Memberikan sedikit waktu tambahan agar render halaman lebih sempurna
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                iframe.classList.add('loaded'); // Memunculkan iframe dengan efek fade-in
+            }, 500); 
+        }
     </script>
 </body>
 </html>
